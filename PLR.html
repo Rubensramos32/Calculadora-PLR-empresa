@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora da MOEDA</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #000000;
+    }
+    .container {
+        background-color: #888a8b;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        width: 100%;
+    }
+    input[type="number"], input[type="text"] {
+        width: calc(100% - 20px);
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #0f12dd;
+        border-radius: 4px;
+    }
+    input[type="submit"] {
+        background-color: #4CAF50;
+        color: rgb(255, 255, 255);
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h2><center>Calculadora do PLR</center></h2>
+    <form id="plrForm">
+        <label for="nota">Digita tua nota da avaliação de desempenho:</label>
+        <input type="text" id="nota" name="nota" required autocomplete="off"><br>
+        <label for="salario">Digita o teu salário de dezembro de 2023:</label>
+        <input type="text" id="salario" name="salario" required autocomplete="off"><br>
+        <label for="meses_trabalhados">Quantos meses tu trabalhou até final de 2023 :</label>
+        <input type="number" id="meses_trabalhados" name="meses_trabalhados" required><br>
+        <input type="submit" value="Calcular PLR">
+    </form>
+    <div id="resultado"></div>
+</div>
+
+<script>
+document.getElementById("plrForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    var nota = parseFloat(document.getElementById("nota").value.replace(',', '.'));//ignora ponto e virgula do usuario
+    var salario = parseFloat(document.getElementById("salario").value.replace(/\./g, '').replace(',', '.'));// ignora ponto e virgula do usuario
+    var plr = 0.800;
+    var meses_trabalhados = parseInt(document.getElementById("meses_trabalhados").value);
+    var calculo = ((((nota * salario) * plr) / 12) * meses_trabalhados) / 100; // Dividindo por 100 para ficar no formato milhares
+    var calculo_formatado = calculo.toFixed(2);
+    document.getElementById("resultado").innerHTML = " TA BOCHECHA EM !!!!: R$ " + calculo_formatado;
+    document.getElementById("plrForm").reset(); // Limpa os campos após o envio do formulário
+});
+
+</script>
+</body>
+</html>
+
